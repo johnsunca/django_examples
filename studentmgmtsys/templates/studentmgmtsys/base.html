@@ -26,9 +26,10 @@
             <li><a href="{% url 'studentmgmtsys:student_edit' %}">Edit Student</a></li>
             <li><a href="{% url 'studentmgmtsys:enrollment_create' %}">Add Enrollment</a></li>
             <li><a href="{% url 'studentmgmtsys:enrollment_edit' %}">Edit Enrollment</a></li>
-            <li><a href="{% url 'studentmgmtsys:report' %}">Report</a></li>
-            <li><a href="/admin">Admin Login</a></li>
+            <li><a href="{% url 'studentmgmtsys:report' %}">Create Report</a></li>
+            <li><a href="/admin">Admin Site</a></li>
             {% endif %}
+            <li></li>
         </ul>
     </nav>
     <main>
@@ -36,7 +37,7 @@
         {% endblock %}
     </main>
     <footer>
-        <p>&copy; {% now "Y" %} - 2032 JS. All rights reserved.</p>
+        <p>Copyright &copy; {% now "Y" %}-2032 JS. All rights reserved.</p>
     </footer>
 </body>
 </html>

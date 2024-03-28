@@ -47,8 +47,5 @@ class Enrollment(models.Model):
         return f"{self.student} - {self.subject}: {self.mark}"
 
 class Setting(models.Model):
-    stage = models.IntegerField(null=True, blank=True, default=1)
-    reserve1 = models.IntegerField(null=True, blank=True, default=1)
-    reserve2 = models.IntegerField(null=True, blank=True, default=1)
-    reserve3 = models.BooleanField(null=True, blank=True, default=False)
-    reserve4 = models.BooleanField(null=True, blank=True, default=False)
+    name = models.CharField(max_length=100, null=True, blank=True)
+    value = models.CharField(max_length=100, null=True, blank=True)

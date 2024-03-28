@@ -17,10 +17,10 @@
     <tbody>
         {% for favoritebook in favoritebook_list %}
         {% if user.is_superuser %}<td>{{ favoritebook.user.username }}</td>{% endif %}
-            <td><a href="{% url 'book_detail' favoritebook.book.id %}">{{ favoritebook.book.title }}</a></td>
+            <td><a href="{% url 'bmsapp:book_detail' favoritebook.book.id %}">{{ favoritebook.book.title }}</a></td>
             <td>{{ favoritebook.added_at }}</td>
             <td>
-                <a href="{% url 'favoritebook_delete' favoritebook.id %}">
+                <a href="{% url 'bmsapp:favoritebook_delete' favoritebook.id %}">
                     <button>Remove</button>
                 </a>
             </td>
@@ -29,6 +29,6 @@
     </tbody>
 </table>
 
-<a href="{% url 'book_list' %}">
+<a href="{% url 'bmsapp:book_list' %}">
     <button>Book List</button></a>
 {% endblock %}

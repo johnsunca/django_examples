@@ -1,6 +1,8 @@
 from django.urls import include, path
 from . import views
 
+app_name = 'bmsapp'
+
 urlpatterns = [
     path("", views.home, name='home'),
     path("countries", views.country_list, name='country_list'),
@@ -11,10 +13,10 @@ urlpatterns = [
 
     path("authors", views.author_list, name='author_list'),
     path("author/<int:author_id>", views.author_detail, name='author_detail'),
-    # path("author/create/", views.author_create, name='author_create'),
-    # path("author/<int:author_id>/update/", views.author_update, name='author_update'),
-    path("author/create/", views.author_edit_modelform, name='author_create'),
-    path("author/<int:author_id>/update/", views.author_edit_modelform, name='author_update'),
+    # path("author/create/", views.author_create, name='author_create'),                    # way 2
+    # path("author/<int:author_id>/update/", views.author_update, name='author_update'),    # way 2
+    path("author/create/", views.author_edit_modelform, name='author_create'),              # way 3
+    path("author/<int:author_id>/update/", views.author_edit_modelform, name='author_update'),  # way3
     path("author/<int:author_id>/delete/", views.author_delete, name='author_delete'),
 
     path("books", views.book_list, name='book_list'),

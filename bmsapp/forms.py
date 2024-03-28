@@ -33,14 +33,3 @@ class BookModelForm(forms.ModelForm):
         help_texts = {'rating': "Enter your rating for this book"}  # Customize help text for 'rating' field
         widgets = {'rating': forms.NumberInput(attrs={'step': '0.1'})}  
     authors = forms.ModelMultipleChoiceField(queryset=Author.objects.all(), required=False)
-
-# ===========================================================================
-    
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-
-class CreateUserForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ['first_name', 'last_name', 
-                  'username', 'email', 'password1', 'password2']

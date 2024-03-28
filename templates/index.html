@@ -1,1 +1,16 @@
-<h1>Under Construction</h1>
+{% extends "base.html" %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h1>Welcome, {{ user.username }}</h1>
+{% else %}
+<h1>Welcome To My Site</h1>
+{% endif %}
+{% for _ in '01234567890123456789' %}    
+<img class="random-img"
+src="https://source.unsplash.com/random/200x200?sig={{ forloop.counter }}" 
+onclick="if(this.src=='https://source.unsplash.com/random/200x200?sig={{ forloop.counter }}')
+{this.src='https://picsum.photos/200/200?random={{ forloop.counter }}'}
+else{this.src='https://source.unsplash.com/random/200x200?sig={{ forloop.counter }}'}"/>
+{% endfor %}
+{% endblock %}

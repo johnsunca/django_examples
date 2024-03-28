@@ -14,13 +14,13 @@
     </thead>
     <tbody>
         {% for country in country_list %}
-            <td><a href="{% url 'country_detail' country.id %}">{{ country.name }}</a></td>
+            <td><a href="{% url 'bmsapp:country_detail' country.id %}">{{ country.name }}</a></td>
             <td>{{ country.abbreviation }}</td>
             <td>
-                <a href="{% url 'country_update' country.id %}">
+                <a href="{% url 'bmsapp:country_update' country.id %}">
                     <button>Edit</button>
                 </a>
-                <a href="{% url 'country_delete' country.id %}">
+                <a href="{% url 'bmsapp:country_delete' country.id %}">
                     <button>Delete</button>
                 </a>
             </td>
@@ -28,7 +28,7 @@
         {% endfor %}
     </tbody>
 </table>
-<a href="{% url 'country_create' %}">
+<a href="{% url 'bmsapp:country_create' %}">
     <button>Create Country</button>
 </a>
 {% endblock %}

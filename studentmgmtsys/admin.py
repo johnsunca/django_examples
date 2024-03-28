@@ -4,13 +4,12 @@ from django.contrib import admin
 
 from .models import Department, Student, Subject, Enrollment, Setting
 
-
 # guest account: guest1/HelloDjango
 
 # simple customization
-admin.site.site_title = 'Student Management System - Admin'
-admin.site.site_header = 'Student Management System - Admin'
-admin.site.index_title = 'Student Management System - Index'
+admin.site.site_title = 'Site Admin'
+admin.site.site_header = 'Site Admin'
+admin.site.index_title = 'App Index'
 
 class StudentAdmin(admin.ModelAdmin):
     list_display = ['student_id', 'name', 'date_of_birth', 'department', 'is_international']

@@ -12,7 +12,7 @@ urlpatterns = [
 
     path('list_departments/', views.department_list, name='list_departments'),
     # path('department/<int:department_id>/', views.department_detail, name='department_detail'),
-    # path('delete_department/<int:department_id>/', views.delete_department, name='delete_department'),
+    path('delete_department/<int:department_id>/', views.delete_department, name='delete_department'),
 
     path('list_students/', views.student_list, name='list_students'),
     path('student/<int:student_id>/', views.student_detail, name='student_detail'),
@@ -20,7 +20,7 @@ urlpatterns = [
 
     path('list_subjects/', views.subject_list, name='list_subjects'),
     # path('subject/<int:subject_id>/', views.subject_detail, name='subject_detail'),
-    # path('delete_subject/<int:subject_id>/', views.delete_subject, name='delete_subject'),
+    path('delete_subject/<int:subject_id>/', views.delete_subject, name='delete_subject'),
 
     path('list_enrollments/', views.enrollment_list, name='list_enrollments'),
     # path('enrollment/<int:enrollment_id>/', views.enrollment_detail, name='enrollment_detail'),

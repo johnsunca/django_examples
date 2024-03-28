@@ -76,3 +76,5 @@ class FavoriteBook(models.Model):
 
     def __str__(self):
         return f'{self.user}: {self.book} ({self.added_at})'
+
+    

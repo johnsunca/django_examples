@@ -24,7 +24,7 @@
                 {% for author in country.author_set.all %}
             <ul>
                 <li>
-                    <a href="{% url 'author_detail' author.id %}">{{ author.name }}</a>
+                    <a href="{% url 'bmsapp:author_detail' author.id %}">{{ author.name }}</a>
                 </li>
             </ul>
                 {% empty %}
@@ -38,7 +38,7 @@
                 {% for publisher in country.publisher_set.all %}
             <ul>
                 <li>
-                    <a href="{% url 'publisher_detail' publisher.id %}">{{ publisher.name }}</a>
+                    <a href="{% url 'bmsapp:publisher_detail' publisher.id %}">{{ publisher.name }}</a>
                 </li>
             </ul>
                 {% empty %}
@@ -50,13 +50,13 @@
 {% endblock %}
 
 {% block buttons %}
-<a href="{% url 'country_update' country.id %}">
+<a href="{% url 'bmsapp:country_update' country.id %}">
     <button>Edit</button>
 </a>
-<a href="{% url 'country_delete' country.id %}">
+<a href="{% url 'bmsapp:country_delete' country.id %}">
     <button>Delete</button>
 </a>
-<a href="{% url 'country_list' %}">
+<a href="{% url 'bmsapp:country_list' %}">
     <button>Country List</button>
 </a>
 {% endblock %}

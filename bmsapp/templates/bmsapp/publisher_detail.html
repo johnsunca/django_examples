@@ -31,7 +31,7 @@
     <tr>
         <td>Country:</td>
         <td>
-            {% if publisher.country %}<a href="{% url 'country_detail' publisher.country.id %}">{{ publisher.country }}</a>
+            {% if publisher.country %}<a href="{% url 'bmsapp:country_detail' publisher.country.id %}">{{ publisher.country }}</a>
             {% else %}
             {{ publisher.country }}
             {% endif %}
@@ -52,7 +52,7 @@
                 {% for book in publisher.book_set.all %}
             <ul>
                 <li>
-                    <a href="{% url 'book_detail' book.id %}">{{ book.title }}</a>
+                    <a href="{% url 'bmsapp:book_detail' book.id %}">{{ book.title }}</a>
                 </li>
             </ul>
                 {% empty %}
@@ -64,13 +64,13 @@
 {% endblock %}
 
 {% block buttons %}
-<a href="{% url 'publisher_update' publisher.id %}">
+<a href="{% url 'bmsapp:publisher_update' publisher.id %}">
     <button>Edit</button>
 </a>
-<a href="{% url 'publisher_delete' publisher.id %}">
+<a href="{% url 'bmsapp:publisher_delete' publisher.id %}">
     <button>Delete</button>
 </a>
-<a href="{% url 'publisher_list' %}">
+<a href="{% url 'bmsapp:publisher_list' %}">
     <button>Publisher List</button>
 </a>
 {% endblock %}

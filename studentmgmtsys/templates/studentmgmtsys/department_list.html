@@ -14,8 +14,8 @@
             <th>Students</th>
             {% comment %}
             <th>Details</th>
-            <th>Delete</th>
             {% endcomment %}
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -27,8 +27,8 @@
             <td><a href="{% url 'studentmgmtsys:search_students_by_department' department.id %}">Students</a></td>
             {% comment %}
             <td><a href="{% url 'studentmgmtsys:department_detail' department.id %}">Details</a></td>
-            <td><a href="{% url 'studentmgmtsys:delete_department' department.id %}">Delete</a></td>
             {% endcomment %}
+            <td><a href="{% url 'studentmgmtsys:delete_department' department.id %}">Delete</a></td>
         </tr>
         {% endfor %}
     </tbody>

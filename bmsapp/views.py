@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from .models import Country, Author, Book, Publisher, FavoriteBook
 from .forms import AuthorForm, AuthorModelForm, BookModelForm
 
-
 from django.contrib.auth.decorators import (
     user_passes_test,
     permission_required,
@@ -45,7 +44,7 @@ def country_delete(request, country_id):
     country = get_object_or_404(Country, pk=country_id)
     if request.method == 'POST':
         country.delete()
-        return redirect('country_list')
+        return redirect('bmsapp:country_list')
     
     return render(request, 'bmsapp/country_delete.html', {'country': country})
 
@@ -67,7 +66,7 @@ def country_update(request, country_id=None):
             country.save()
         else:
             Country.objects.create(name=name, abbreviation=abbreviation)
-        return redirect('country_list')
+        return redirect('bmsapp:country_list')
     
     return render(request, 'bmsapp/country_form.html', {'country': country})
 
@@ -86,7 +85,7 @@ def author_delete(request, author_id):
     author = get_object_or_404(Author, pk=author_id)
     if request.method == 'POST':        
         author.delete()
-        return redirect('author_list')
+        return redirect('bmsapp:author_list')
     else:
         return render(request, 'bmsapp/author_delete.html', {'author': author})
 
@@ -112,7 +111,7 @@ def author_create(request):
             )
             try:
                 author.save()
-                return redirect('author_list')
+                return redirect('bmsapp:author_list')
             except Exception as e:
                 error_message = 'Error: ' + str(e)
                 form.add_error('email', 'This email address is already in use.')
@@ -138,7 +137,7 @@ def author_update(request, author_id):
             author.is_active = form.cleaned_data['is_active']
             try:
                 author.save()
-                return redirect('author_list')
+                return redirect('bmsapp:author_list')
             except Exception as e:
                 error_message = 'Error: ' + str(e)
                 form.add_error('email', 'This email address is already in use.')
@@ -172,14 +171,13 @@ def author_edit_modelform(request, author_id=None):
         form = AuthorModelForm(request.POST, instance=author)
         if form.is_valid():
             form.save()
-            return redirect('author_list')  
+            return redirect('bmsapp:author_list')  
     else:
         form = AuthorModelForm(instance=author)
 
     context = {'form': form, 'author': author}
     return render(request, 'bmsapp/author_form.html', context)
     
-
 # ===========================================================================
 
 def book_list(request):
@@ -199,7 +197,7 @@ def book_edit(request, book_id=None):
         form = BookModelForm(request.POST, instance=book)
         if form.is_valid():
             form.save()
-            return redirect('book_list')
+            return redirect('bmsapp:book_list')
     else:
         form = BookModelForm(instance=book)
 
@@ -210,7 +208,7 @@ def book_delete(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
     if request.method == 'POST':
         book.delete()
-        return redirect('book_list')
+        return redirect('bmsapp:book_list')
     return render(request, 'bmsapp/book_delete.html', {'book': book})
 
 # ===========================================================================
@@ -272,7 +270,7 @@ def search(request):
     key = request.GET.get('key', '')
     type = request.GET.get('type', 'author')
     if len(key) < 3 or type not in ['author', 'book', 'publisher']: 
-        return redirect('home')
+        return redirect('bmsapp:home')
     
     result_set = None
     if type == 'author': 
@@ -282,30 +280,10 @@ def search(request):
     elif type == 'publisher':
         result_set = Publisher.objects.filter(name__icontains=key)
     else: 
-        return redirect('home')
+        return redirect('bmsapp:home')
     
     return render(request, f'bmsapp/{type}_list.html', 
                   {f'{type}_list': result_set, 'search_key': key})
-
-
-# ===========================================================================
-
-# not needed since login redirect set in settings
-# def profile(request):
-#     return redirect('home')
-
-
-from .forms import CreateUserForm
-
-def signup(request):
-    form = CreateUserForm()
-    if request.method == "POST":
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("login")
-    return render(request, 'signup.html', {'form':form})
-
 
 # ===========================================================================
 
@@ -328,14 +306,14 @@ def favoritebook_create(request, book_id):
         favoritebook.save()
     except:
         FavoriteBook.objects.create(user=user, book=book)
-    return redirect('favoritebook_list')
+    return redirect('bmsapp:favoritebook_list')
         
 @login_required
 def favoritebook_delete(request, favoritebook_id):
     favoritebook = get_object_or_404(FavoriteBook, pk=favoritebook_id)
     if favoritebook and (favoritebook.user == request.user or request.user.is_superuser):
         favoritebook.delete()
-    return redirect('favoritebook_list')
+    return redirect('bmsapp:favoritebook_list')
 
 # ===========================================================================
 
@@ -418,4 +396,4 @@ def generate_fake_data_view(request):
 
     print('Data population completed successfully.')
 
-    return redirect('home')
+    return redirect('bmsapp:home')

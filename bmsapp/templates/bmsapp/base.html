@@ -7,29 +7,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}My Website{% endblock %}</title>
+    <title>{% block title %}Book Management System{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'bmsapp/css/styles.css' %}">
 </head>
 
 <body>
     <header>
         <nav class="nav-links">
-            <a href="{% url 'home' %}" class="logo">
+            <a href="{% url 'bmsapp:home' %}" class="logo">
                 <!-- Add your logo here -->
                 <img src="{% static 'bmsapp/img/logo.png' %}" alt="Logo" class="logo-img">
             </a>
             <ul>
-                <li><a href="{% url 'author_list' %}">Authors</a></li>
-                <li><a href="{% url 'book_list' %}">Books</a></li>
-                <li><a href="{% url 'publisher_list' %}">Publishers</a></li>
-                <li><a href="{% url 'country_list' %}">Countries</a></li>
+                <li><a href="{% url 'bmsapp:author_list' %}">Authors</a></li>
+                <li><a href="{% url 'bmsapp:book_list' %}">Books</a></li>
+                <li><a href="{% url 'bmsapp:publisher_list' %}">Publishers</a></li>
+                <li><a href="{% url 'bmsapp:country_list' %}">Countries</a></li>
                 {% if user.is_authenticated %}
-                <li><a href="{% url 'favoritebook_list' %}">Favorite Books</a></li>
+                <li><a href="{% url 'bmsapp:favoritebook_list' %}">Favorite Books</a></li>
                 {% endif %}
             </ul>
             <ul>
                 <li>
-                    <form action="{% url 'search' %}">
+                    <form action="{% url 'bmsapp:search' %}">
                         <input type="text" name="key" placeholder="Enter at least 3 letters"/> <span style="color:white">in</span>
                         <select name="type">
                             <option value="author">Authors</option>
@@ -47,7 +47,7 @@
             </ul>
             {% else %}
             <ul class="loginout">
-                <li><a href="{% url 'home' %}">User: {{ user.username }}</a></li>
+                <li><a href="{% url 'bmsapp:home' %}">User: {{ user.username }}</a></li>
             </ul>
             <ul>
                 <li>
@@ -68,8 +68,7 @@
     </main>
 
     <footer>
-        <!-- Footer content goes here -->
-        <p>&copy; {% now "Y" %} JS @ Sheridan</p>
+        <p>Copyright &copy; {% now "Y" %}-2032 JS. All rights reserved.</p>
     </footer>
 </body>
 

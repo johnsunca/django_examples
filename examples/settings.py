@@ -65,10 +65,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'helloworld', # JS
-    'modelsapp', # JS
     'bmsapp', # JS
     'studentmgmtsys', # JS
+    # 'helloworld', # JS
+    # 'modelsapp', # JS
 ]
 
 MIDDLEWARE = [
@@ -165,7 +165,7 @@ STATIC_URL = 'static/'  # or '/static/' ??
 
 # JS: needed?
 # other directories for looking for static files
-# STATICFILES_DIRS = [BASE_DIR / "static", "/var/www/static/",]
+STATICFILES_DIRS = [BASE_DIR / "static",]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -174,8 +174,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Below by JS =======================================================================
 
-LOGOUT_REDIRECT_URL='/studentmgmtsys' # by default logout redirect to /accounts/logout and show logged-out template
-LOGIN_REDIRECT_URL='/studentmgmtsys'# by default login redirect to /accounts/profile and show a custom profile page
+LOGOUT_REDIRECT_URL='/' # by default logout redirect to /accounts/logout and show logged-out template
+# LOGIN_REDIRECT_URL='/studentmgmtsys'# by default login redirect to /accounts/profile and show a custom profile page
 # LOGIN_URL='/login/'
 
 MEDIA_ROOT = BASE_DIR / "media"  # path to store media files (under project root)

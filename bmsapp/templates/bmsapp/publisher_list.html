@@ -16,12 +16,12 @@
     </thead>
     <tbody>
         {% for publisher in publisher_list %}
-            <td><a href="{% url 'publisher_detail' publisher.id %}">{{ publisher.name }}</a></td>
+            <td><a href="{% url 'bmsapp:publisher_detail' publisher.id %}">{{ publisher.name }}</a></td>
             <td>{{ publisher.address }}</td>
             <td>{{ publisher.city }}</td>
             <td>{{ publisher.state_province }}</td>
             <td>
-                {% if publisher.country %}<a href="{% url 'country_detail' publisher.country.id %}">{{ publisher.country }}</a>
+                {% if publisher.country %}<a href="{% url 'bmsapp:country_detail' publisher.country.id %}">{{ publisher.country }}</a>
                 {% else %}
                 {{ publisher.country }}
                 {% endif %}
@@ -33,10 +33,10 @@
                 {% endif %}
             </td>
             <td>
-                <a href="{% url 'publisher_update' publisher.id %}">
+                <a href="{% url 'bmsapp:publisher_update' publisher.id %}">
                     <button>Edit</button>
                 </a>
-                <a href="{% url 'publisher_delete' publisher.id %}">
+                <a href="{% url 'bmsapp:publisher_delete' publisher.id %}">
                     <button>Delete</button>
                 </a>
             </td>
@@ -45,6 +45,6 @@
     </tbody>
 </table>
 
-<a href="{% url 'publisher_create' %}">
+<a href="{% url 'bmsapp:publisher_create' %}">
     <button>Add Publisher</button></a>
 {% endblock %}

@@ -5,9 +5,9 @@ from django.contrib import admin
 from .models import Country, Author, Book, Publisher, FavoriteBook
 
 # simple customization
-admin.site.site_title = 'Book Management System - Admin'
-admin.site.site_header = 'Book Management System - Admin'
-admin.site.index_title = 'Book Management System - Index'
+admin.site.site_title = 'Site Admin'
+admin.site.site_header = 'Site Admin'
+admin.site.index_title = 'App Index'
 
 # customize admin forms: 
 # - fields/fieldsets, date_hierarchy

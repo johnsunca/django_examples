@@ -6,17 +6,23 @@ from .models import Department, Setting, Student, Subject, Enrollment
 from django.utils import timezone
 from faker import Faker
 import random
+from django.contrib.auth.decorators import (
+    user_passes_test,
+    permission_required,
+    login_required,
+)
 
 # stage1: read and delete
 
 def home(request):
-    settings = Setting.objects.all()
-    stage = str(settings[0].stage) if settings else '1'
+    stagevalue = Setting.objects.filter(name='stage')[0].value
+    stage = str(stagevalue) if stagevalue else '1'
     request.session['stage'] = 'stage' + stage
     print(request.session['stage'])
     return redirect('studentmgmtsys:list_students')
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def insert_test_data(request):
     fake = Faker()
 
@@ -85,11 +91,12 @@ def department_list(request):
 #     return render(request, 'studentmgmtsys/department_detail.html', {'department': department})
 
 # # Function-based view for deleting department
-# def delete_department(request, department_id):
-#     department = get_object_or_404(Department, pk=department_id)
-#     if department:
-#         department.delete()
-#     return redirect('studentmgmtsys:list_departments')
+@user_passes_test(lambda u: u.is_superuser)
+def delete_department(request, department_id):
+    department = get_object_or_404(Department, pk=department_id)
+    if department:
+        department.delete()
+    return redirect('studentmgmtsys:list_departments')
 
 # Function-based view for listing students
 def student_list(request):
@@ -102,6 +109,7 @@ def student_detail(request, student_id):
     return render(request, 'studentmgmtsys/student_detail.html', {'student': student})
 
 # Function-based view for deleting student
+@user_passes_test(lambda u: u.is_superuser)
 def delete_student(request, student_id):
     student = get_object_or_404(Student, pk=student_id)
     if student:
@@ -119,11 +127,12 @@ def subject_list(request):
 #     return render(request, 'studentmgmtsys/subject_detail.html', {'subject': subject})
 
 # # Function-based view for deleting subject
-# def delete_subject(request, subject_id):
-#     subject = get_object_or_404(Subject, pk=subject_id)
-#     if subject:
-#         subject.delete()
-#     return redirect('studentmgmtsys:list_subjects')
+@user_passes_test(lambda u: u.is_superuser)
+def delete_subject(request, subject_id):
+    subject = get_object_or_404(Subject, pk=subject_id)
+    if subject:
+        subject.delete()
+    return redirect('studentmgmtsys:list_subjects')
 
 # Function-based view for listing enrollments
 def enrollment_list(request):
@@ -136,12 +145,14 @@ def enrollment_list(request):
 #     return render(request, 'studentmgmtsys/enrollment_detail.html', {'enrollment': enrollment})
 
 # Function-based view for deleting enrollment
+@user_passes_test(lambda u: u.is_superuser)
 def delete_enrollment(request, enrollment_id):
     enrollment = get_object_or_404(Enrollment, pk=enrollment_id)
     if enrollment:
         enrollment.delete()
     return redirect('studentmgmtsys:list_enrollments') 
 
+# ============================================================================
 
 def search(request):
     departments = Department.objects.all()
@@ -194,10 +205,11 @@ def search_enrollments_by_student(request, student_id):
     return render(request, 'studentmgmtsys/enrollment_search_results.html', 
                   {'enrollments': enrollments, 'search_key': f'Student: {Student.objects.get(id=student_id)}'})
 
+# ============================================================================
 
-# ==========================================================
 # stage2: create and update
 
+@user_passes_test(lambda u: u.is_superuser)
 def student_edit(request, student_id=None):
     # If pk is provided, it's an update operation, otherwise it's a create operation
     # If GET method, it's for an empty form for create or initial form for update
@@ -220,6 +232,7 @@ def student_edit(request, student_id=None):
     return render(request, 'studentmgmtsys/student_form.html', context)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def enrollment_edit(request, enrollment_id=None):
     enrollment = get_object_or_404(Enrollment, pk=enrollment_id) if enrollment_id else None
 
@@ -237,6 +250,7 @@ def enrollment_edit(request, enrollment_id=None):
         context['enrollments'] = Enrollment.objects.all()
         
     return render(request, 'studentmgmtsys/enrollment_form.html', context)
+
 
 def report(request):
     context = {'data': {}}    

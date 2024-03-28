@@ -1,0 +1,41 @@
+{% load static %} <!-- Load static files -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Welcome To My Website{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+    <nav class="nav-links">
+        <a href="{% url 'home' %}"><img src="{% static 'img/logo.jpg' %}" alt="Logo" class="logo-img"></a>
+        <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        {% if not user.is_authenticated %}
+        <li><a href="{% url 'signup' %}">Signup</a></li>
+        <li><a href="{% url 'login' %}?next={% url 'home' %}">Login</a></li>
+        {% else %}
+        <li>
+            <form method="post" action="{% url 'logout' %}?next={% url 'home' %}">
+                {% csrf_token %}
+                <button class="link-button" type="submit">Logout</button>
+            </form>
+        </li>
+        </ul>
+        {% endif %}
+    </nav>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer>
+        <p>Copyright &copy; {% now "Y" %}-2032 JS. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

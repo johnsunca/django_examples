@@ -17,25 +17,25 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-import bmsapp.views
-import studentmgmtsys.views
+from . import views
 from django.views.generic import TemplateView
 
 urlpatterns = [    
+    # Homepage
+    path("", TemplateView.as_view(template_name='index.html'), name='home'),    # this is at project level
+    # Admin
+    path('admin/', admin.site.urls),
     # Auth
     path('accounts/', include('django.contrib.auth.urls')), 
-    # path("accounts/profile/", bmsapp.views.profile, name="profile"), # not needed since login redirect set in settings
-    path("signup/", bmsapp.views.signup, name="signup"), # this can be moved out to project level
+    path("accounts/profile/", views.profile, name="profile"), # not needed since login redirect set in settings
+    path("signup/", views.signup, name="signup"), # this can be moved out to project level
 
     # Apps
     path("studentmgmtsys/", include("studentmgmtsys.urls")),        # 4
     path("bmsapp/", include("bmsapp.urls")),        # 3 - book mgmt sys
-    path("modelsapp/", include("modelsapp.urls")),      # 2
-    path("helloworld/", include("helloworld.urls")),    # 1
-    path("", TemplateView.as_view(template_name='index.html')),    # 1 # this is at project level
+    # path("modelsapp/", include("modelsapp.urls")),      # 2
+    # path("helloworld/", include("helloworld.urls")),    # 1
 
-    # Admin
-    path('admin/', admin.site.urls),
 ]
 
 from django.conf import settings
