@@ -1,0 +1,42 @@
+{% load static %} <!-- Load static files -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Student Management System{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'studentmgmtsys/css/styles.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <a href="{% url 'studentmgmtsys:home' %}" class="logo">
+                <img src="{% static 'studentmgmtsys/img/logo.png' %}" alt="Logo" class="logo-img">
+            </a>
+            <li><a href="{% url 'studentmgmtsys:list_students' %}">Students</a></li>
+            <li><a href="{% url 'studentmgmtsys:list_departments' %}">Departments</a></li>
+            <li><a href="{% url 'studentmgmtsys:list_subjects' %}">Subjects</a></li>
+            <li><a href="{% url 'studentmgmtsys:list_enrollments' %}">Enrollments</a></li>
+            <li><a href="{% url 'studentmgmtsys:search' %}">Search</a></li>
+            <li><a href="{% url 'studentmgmtsys:insert_test_data' %}">* Insert Test Data *</a></li>
+            {% if request.session.stage == 'stage2' or request.user.is_superuser %}
+            <br><hr><br>
+            <li><a href="{% url 'studentmgmtsys:student_create' %}">Add Student</a></li>
+            <li><a href="{% url 'studentmgmtsys:student_edit' %}">Edit Student</a></li>
+            <li><a href="{% url 'studentmgmtsys:enrollment_create' %}">Add Enrollment</a></li>
+            <li><a href="{% url 'studentmgmtsys:enrollment_edit' %}">Edit Enrollment</a></li>
+            <li><a href="{% url 'studentmgmtsys:report' %}">Report</a></li>
+            <li><a href="/admin">Admin Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer>
+        <p>&copy; {% now "Y" %} - 2032 JS. All rights reserved.</p>
+    </footer>
+</body>
+</html>

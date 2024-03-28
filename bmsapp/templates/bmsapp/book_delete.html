@@ -1,0 +1,18 @@
+{% extends 'bmsapp/book_detail.html' %}
+
+{% block title %}Delete Book{% endblock %}
+
+{% block heading %}
+<h1>Delete Book - {{ book.title }}</h1>
+{% endblock %}
+
+{% block buttons %}
+<p>Are you sure you want to delete "{{ book.title }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirm Delete</button>
+    <a href="{% url 'book_list' %}" id="cancelButton">
+        <button type="button">Cancel</button>
+    </a>
+</form>
+{% endblock %}

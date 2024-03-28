@@ -1,0 +1,140 @@
+{% extends 'bmsapp/base.html' %}
+{% block title %}Demo Application{% endblock %}
+{% block content %}
+
+<h1>Book Management System</h1>
+
+<hr>
+<h3>Application Information</h3>
+{% if user.is_superuser %}
+<h5><a href="{% url 'generate_fake_data' %}">Generate Fake Data</a></h5>
+{% endif %}
+<table>
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Count</th>
+            <th>Techniques</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Users</td>
+            <td>{{ count.users }}</td>
+            <td>Django built-in</td>
+        </tr>
+        <tr>
+            <td>Countries</td>
+            <td>{{ count.countries }}</td>
+            <td>Raw HTML form</td>
+        </tr>
+        <tr>
+            <td>Authors</td>
+            <td>{{ count.authors }}</td>
+            <td>Two versions, Form and ModelForm</td>
+        </tr>
+        <tr>
+            <td>Books</td>
+            <td>{{ count.books }}</td>
+            <td>ModelForm</td>
+        </tr>
+        <tr>
+            <td>Publishers</td>
+            <td>{{ count.publishers }}</td>
+            <td>Class-based generic views</td>
+        </tr>
+        <tr>
+            <td>My Favorite Books</td>
+            <td>{{ count.favoritebooks }}</td>
+            <td>FBV and CBV</td>
+        </tr>
+        <tr>
+            <td>All Favorite Books</td>
+            <td>{{ count.favoritebooks_all }}</td>
+            <td>FBV and CBV</td>
+        </tr>
+    </tbody>
+</table>
+<hr>
+<h3>User Information</h3>
+{% comment %}
+{{user}} is {{request.user}}
+{% endcomment %}
+<table>
+    <tbody>
+        <tr>
+            <th>ID</th>
+            <td>{{ user.id }}</td>
+        </tr>
+        <tr>
+            <th>Username</th>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <th>Password</th>
+            <td>{{ user.password }}</td>
+        </tr>
+        <tr>
+            <th>First Name</th>
+            <td>{{ user.first_name }}</td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td>{{ user.last_name }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>Date Joined</th>
+            <td>{{ user.date_joined }}</td>
+        </tr>
+        <tr>
+            <th>Last Login</th>
+            <td>{{ user.last_login }}</td>
+        </tr>
+        <tr>
+            <th>Superuser</th>
+            <td>{{ user.is_superuser }}</td>
+        </tr>
+        <tr>
+            <th>Staff</th>
+            <td>{{ user.is_staff }}</td>
+        </tr>
+        <tr>
+            <th>Active</th>
+            <td>{{ user.is_active }}</td>
+        </tr>
+        <tr>
+            <th>Groups</th>
+            <td>{% if user.groups.all %}{{ user.groups.all }}{% else %}None{% endif %}</td>
+        </tr>
+        <tr>
+            <th>User Permissions</th>
+            <td>{% if user.user_permissions.all %}{{ user.user_permissions.all }}{% else %}None{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Authenticated</th>
+            <td>{{ user.is_authenticated }}</td>
+        </tr>
+        <tr>
+            <th>Anonymous</th>
+            <td>{{ user.is_anonymous }}</td>
+        </tr>
+    </tbody>
+</table>
+
+{% if perms.bmsapp %}
+<hr>
+<h3>All Permissions</h3>
+<p>{{ perms.bmsapp }}</p>
+{% endif %}
+
+{% if user.is_superuser %}
+<hr>
+<h3>All Users</h3>
+<p>{{ count.users_all }}</p>
+{% endif %}
+
+{% endblock %}

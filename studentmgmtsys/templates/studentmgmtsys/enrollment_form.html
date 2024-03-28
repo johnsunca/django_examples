@@ -1,0 +1,37 @@
+{% extends 'studentmgmtsys/base.html' %}
+
+{% block title %}Enrollment Form{% endblock %}
+
+{% block content %}
+<h1>{% if enrollments or enrollment %}Edit Enrollment
+    {% if enrollment %} : {{enrollment.student.student_id}} - {{enrollment.student.name}} - {{enrollment.subject.name}}{% endif %}
+    {% else %}Add Enrollment{% endif %}</h1>
+
+
+{% if enrollments %}
+<select class="option_enroll" onchange="location = this.value;">
+    <option class="option_enroll">Choose the enrollment to edit</option>
+    {% for enroll in enrollments %}
+    <option class="option_student" value="{% url 'studentmgmtsys:enrollment_update' enroll.id %}">
+        {{enroll.student.student_id}} - {{enroll.student.name}} - {{enroll.subject.name}}</a></option>
+    {% endfor %}
+</select>
+{% endif %}
+
+{% if not enrollments or enrollment %}
+<form method="post">
+    {% if error_message %}
+    <p class="error-message">{{ error_message }}</p>
+    {% endif %}
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <button type="submit">Save</button>
+    <a href="{% url 'studentmgmtsys:list_enrollments' %}" id="cancelButton">
+        <button type="button">Cancel</button>
+    </a>
+</form>
+{% endif %}
+
+{% endblock %}

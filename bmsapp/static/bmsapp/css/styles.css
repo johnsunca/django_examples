@@ -1,0 +1,205 @@
+/* Reset default browser styles */
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, img, ul, ol, li, table, tr, th, td, form, input, button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Global styles */
+body {
+    background-color: #f7f7f7;
+    color: #333;
+    font-size: 16px;
+    font-size: 80%;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Heading styles */
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Paragraph styles */
+p {
+    margin-bottom: 20px;
+}
+
+/* Link styles */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Button styles */
+button, .button {
+    display: inline-block;
+    padding: 7px 14px;
+    font-size: 16px;
+    font-size: 80%;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover, .button:hover {
+    background-color: #0056b3;
+}
+
+/* Table styles */
+table {
+    width: auto;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+/* Form styles */
+form {
+    margin-bottom: 20px;
+}
+
+/* Adjust input width */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form select {
+    width: auto;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 90%;
+}
+
+/* Adjust button width */
+form input[type="submit"],
+form button {
+    width: auto;
+    padding: 10px 20px;
+    margin-top: 10px;
+}
+
+/* Navigation styles */
+nav {
+    background-color: #007bff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav form {
+    margin: auto;
+}
+
+nav .logo {
+    margin-right: 20px; /* Keep some space between logo and links */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Change display to flex */
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li:last-child {
+    margin-right: 20px; /* Remove margin from the last link */
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Logo style */
+.logo-img {
+    width: 60px;
+    height: auto;
+}
+
+/* Footer styles */
+footer {
+    margin-top: 20px; 
+}
+
+.error-message {
+    color: red; 
+    font-weight: bold; 
+    margin-top: 10px;
+}
+
+/* Book input style */
+input#id_title, select#id_authors {
+    width: 400px
+}
+
+/* Publisher input style */
+input#id_name {
+    width: 400px
+}
+
+main, ul, li {    
+    margin-left: 15px;
+}
+
+/* logout button as a link */
+.link-button {
+    background: none;
+    border: none;
+    color: rgb(255, 255, 255); /* or any color you want */
+    text-decoration: underline;
+    padding: 0;
+    font: inherit;
+    text-align: right;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.loginout {
+    margin-left: auto;
+}
+
+.div-center{
+    margin: 40px;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid grey ;
+    width: fit-content;
+}
+
+h3 {
+    color: #007bff
+}

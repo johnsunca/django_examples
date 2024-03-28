@@ -1,0 +1,46 @@
+{% extends "bmsapp/base.html" %}
+
+{% block content %}
+
+<div class="div-center">
+
+{% if form.errors and not form.non_field_errors %}
+<p class="errornote">Please correct the errors below.
+</p>
+{% endif %}
+
+{% if form.non_field_errors %}
+{% for error in form.non_field_errors %}
+<p class="error-message">
+    {{ error }}
+</p>
+{% endfor %}
+{% endif %}
+
+{% if user.is_authenticated %}
+<p class="error-message">
+    You are authenticated as {{ user.username }}. Logout to create a new account.
+</p>
+{% else %}
+<div>
+    <h3> Create your account </h3>
+    <hr>
+    <br>
+    <form method="POST" autocomplete="off">
+        {% csrf_token %}
+        <table>
+        {{ form.as_table }}
+        </table>
+        <br>
+        <button type="submit">Create account</button>
+    </form>
+    <br>
+    <div>
+        <p> Already have an account? </p> <a href="{% url 'login'%}"> Login </a>
+    </div>
+</div>
+
+{% endif %}
+
+</div>
+{% endblock %}

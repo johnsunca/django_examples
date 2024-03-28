@@ -1,0 +1,70 @@
+{% extends 'bmsapp/base.html' %}
+{% block title %}Author Detail - {{ author.name }}{% endblock %}
+{% block content %}
+{% block heading %}
+<h1>Author Detail - {{ author.name }}</h1>
+{% endblock %}
+{% block detail %}
+<table>
+    <tr>
+        <td>Title:</td>
+        <td>{{ author.title }}</td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td>
+            {% if author.email %}<a href="mailto:{{ author.email }}">{{ author.email }}</a>
+            {% else %}
+            {{ author.email }}
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>Birth Date:</td>
+        <td>{{ author.birth_date }}</td>
+    </tr>
+    <tr>
+        <td>Country:</td>
+        <td>
+            {% if author.country %}<a href="{% url 'country_detail' author.country.id %}">{{ author.country }}</a>
+            {% else %}
+            {{ author.country }}
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>Status:</td>
+        <td>{{ author.status }}</td>
+    </tr>
+    <tr>
+        <td>Is Active:</td>
+        <td>{% if author.is_active %}YES{% else %}NO{% endif %}</td>
+    </tr>
+    <tr>
+        <td>Books:</td>
+        <td>
+                {% for book in author.book_set.all %}
+            <ul>
+                <li>
+                    <a href="{% url 'book_detail' book.id %}">{{ book.title }}</a>
+                </li>
+            </ul>
+                {% empty %}
+                There is no book of this author.
+                {% endfor %}
+        </td>
+    </tr>
+</table>
+{% endblock %}
+{% block buttons %}
+<a href="{% url 'author_update' author.id %}">
+    <button>Edit</button>
+</a>
+<a href="{% url 'author_delete' author.id %}">
+    <button>Delete</button>
+</a>
+<a href="{% url 'author_list' %}">
+    <button>Author List</button>
+</a>
+{% endblock %}
+{% endblock %}

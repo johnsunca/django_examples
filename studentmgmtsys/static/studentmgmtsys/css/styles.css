@@ -1,0 +1,128 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 80%;
+}
+
+.navbar {
+    background-color: #333;
+    color: #fff;
+    width: 140px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 30px;
+    padding-left: 20px;
+    overflow-y: auto; /* Enable scrolling if needed */
+}
+
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.navbar li {
+    padding: 8px 0;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.logo-img {
+    width: 80px;
+    height: auto;
+    padding-bottom: 20px;
+}
+
+main {
+    margin-left: 160px; /* Adjust based on the width of the navbar */
+    padding: 20px;
+}
+
+/* Form styles */
+form {
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+    width: 100%;
+    padding: 8px;
+    margin: 6px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Paragraph styles */
+p {
+    line-height: 1.5;
+}
+
+/* List styles */
+ul, ol {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+/* CSS for the table */
+table {
+    width: auto;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+/* CSS for table headers */
+th {
+    background-color: #f2f2f2;
+    text-align: left;
+    padding: 8px;
+}
+
+/* CSS for table rows */
+td {
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+}
+
+/* CSS for alternate row color */
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.option_student, .option_enroll {    
+    width: 400px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+footer {
+    margin-top: 20px; 
+    margin-bottom: 20px;
+    margin-left: 200px;
+}

@@ -1,0 +1,17 @@
+{% extends 'studentmgmtsys/base.html' %}
+{% block title %}Subject Detail{% endblock %}
+{% block content %}
+<h1>Subject Detail - {{ subject.name }}</h1>
+<table>
+    <tr>
+        <td>Name:</td>
+        <td>{{ subject.name }}</td>
+    </tr>
+    <tr>
+        <td>Credit:</td>
+        <td>{{ subject.credit }}</td>
+    </tr>
+</table>
+
+<a href="{% url 'studentmgmtsys:delete_subject' subject.id %}">Delete</a>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'bmsapp/base.html' %}
+{% block title %}Book List{% endblock %}
+{% block content %}
+<h1>Book List{% if search_key %} - Search "{{ search_key }}"{% endif %}</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Authors</th>
+            <th>Publisher</th>
+            <th>Published Year</th>
+            <th>Rating</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in book_list %}
+            <td><a href="{% url 'book_detail' book.id %}">{{ book.title }}</a></td>
+            <td>
+                {% for author in book.authors.all %}
+                <a href="{% url 'author_detail' author.id %}">{{ author.name }}</a>{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>            
+            <td>
+                {% if book.publisher %}<a href="{% url 'publisher_detail' book.publisher.id %}">{{ book.publisher }}</a>
+                {% else %}
+                {{ book.publisher }}
+                {% endif %}
+            </td>
+            <td>{{ book.published_year }}</td>
+            <td>{{ book.rating }}</td>
+            <td>
+                <a href="{% url 'book_update' book.id %}">
+                    <button>Edit</button>
+                </a>
+                <a href="{% url 'book_delete' book.id %}">
+                    <button>Delete</button>
+                </a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'favoritebook_create' book.id %}">
+                    <button>Favorite</button>
+                </a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'book_create' %}">
+    <button>Add Book</button></a>
+{% endblock %}

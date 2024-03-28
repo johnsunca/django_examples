@@ -1,0 +1,24 @@
+{% extends 'bmsapp/base.html' %}
+
+{% block title %}Publisher Form{% endblock %}
+
+{% block content %}
+<h1>{% if publisher %}Edit Publisher{% else %}Add Publisher{% endif %}</h1>
+<form method="post"  enctype="multipart/form-data">
+    {% if error_message %}
+    <p class="error-message">{{ error_message }}</p>
+    {% endif %}
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td><b>Photo Image:</b></td>
+            <td><img src="{{MEDIA_URL}}{{ publisher.image }}" alt="{{ publisher.name }}" width="300"></td>
+        </tr>
+        {{ form.as_table }}
+    </table>
+    <button type="submit">Save</button>
+    <a href="{% url 'publisher_list' %}" id="cancelButton">
+        <button type="button">Cancel</button>
+    </a>
+</form>
+{% endblock %}

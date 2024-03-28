@@ -1,0 +1,31 @@
+{% extends 'studentmgmtsys/base.html' %}
+
+{% block title %}Enrollment Detail - {{ enrollment.student.name }}{% endblock %}
+
+{% block content %}
+    <h1>Enrollment Detail - {{ enrollment.student.name }}</h1>
+    <table>
+        <tr>
+            <td>Student ID:</td>
+            <td>{{ enrollment.student.student_id }}</td>
+        </tr>
+        <tr>
+            <td>Student:</td>
+            <td>{{ enrollment.student.name }}</td>
+        </tr>
+        <tr>
+            <td>Subject:</td>
+            <td>{{ enrollment.subject.name }}</td>
+        </tr>
+        <tr>
+            <td>Mark:</td>
+            <td>{{ enrollment.mark }}</td>
+        </tr>
+        <tr>
+            <td>Enroll Date:</td>
+            <td>{{ enrollment.enroll_date }}</td>
+        </tr>
+    </table>
+    
+    <a href="{% url 'studentmgmtsys:delete_enrollment' enrollment.id %}">Delete</a>
+{% endblock %}

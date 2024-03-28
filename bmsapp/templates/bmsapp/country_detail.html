@@ -1,0 +1,64 @@
+{% extends 'bmsapp/base.html' %}
+
+{% block title %}Country Detail - {{ country.name }}{% endblock %}
+
+{% block content %}
+
+{% block heading %}
+<h1>Country Detail - {{ country.name }}</h1>
+{% endblock %}
+
+{% block detail %}
+<table>
+    <tr>
+        <td>Name:</td>
+        <td>{{ country.name }}</td>
+    </tr>
+    <tr>
+        <td>Abbreviation:</td>
+        <td>{{ country.abbreviation }}</td>
+    </tr>
+    <tr>
+        <td>Authors:</td>
+        <td>
+                {% for author in country.author_set.all %}
+            <ul>
+                <li>
+                    <a href="{% url 'author_detail' author.id %}">{{ author.name }}</a>
+                </li>
+            </ul>
+                {% empty %}
+                There is no author of this country.
+                {% endfor %}
+        </td>
+    </tr>    
+    <tr>
+        <td>Publishers:</td>
+        <td>
+                {% for publisher in country.publisher_set.all %}
+            <ul>
+                <li>
+                    <a href="{% url 'publisher_detail' publisher.id %}">{{ publisher.name }}</a>
+                </li>
+            </ul>
+                {% empty %}
+                There is no publisher of this country.
+                {% endfor %}
+        </td>
+    </tr>    
+</table>
+{% endblock %}
+
+{% block buttons %}
+<a href="{% url 'country_update' country.id %}">
+    <button>Edit</button>
+</a>
+<a href="{% url 'country_delete' country.id %}">
+    <button>Delete</button>
+</a>
+<a href="{% url 'country_list' %}">
+    <button>Country List</button>
+</a>
+{% endblock %}
+
+{% endblock %}

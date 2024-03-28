@@ -1,0 +1,34 @@
+{% extends 'bmsapp/base.html' %}
+{% block title %}Favorite Book List{% endblock %}
+{% block content %}
+<h1>Favorite Book List</h1>
+{% if message %}
+<p class="error-message">{{ message }}</p>
+{% endif %}
+<table>
+    <thead>
+        <tr>
+            {% if user.is_superuser %}<th>User</th>{% endif %}
+            <th>Book</th>
+            <th>Last Added At</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for favoritebook in favoritebook_list %}
+        {% if user.is_superuser %}<td>{{ favoritebook.user.username }}</td>{% endif %}
+            <td><a href="{% url 'book_detail' favoritebook.book.id %}">{{ favoritebook.book.title }}</a></td>
+            <td>{{ favoritebook.added_at }}</td>
+            <td>
+                <a href="{% url 'favoritebook_delete' favoritebook.id %}">
+                    <button>Remove</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'book_list' %}">
+    <button>Book List</button></a>
+{% endblock %}

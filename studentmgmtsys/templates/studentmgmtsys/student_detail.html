@@ -1,0 +1,33 @@
+{% extends 'studentmgmtsys/base.html' %}
+{% block title %}Student Detail{% endblock %}
+{% block content %}
+<h1>Student Detail - {{ student.name }}</h1>
+<table>
+    <tr>
+        <td>Name:</td>
+        <td>{{ student.name }}</td>
+    </tr>
+    <tr>
+        <td>ID:</td>
+        <td>{{ student.student_id }}</td>
+    </tr>
+    <tr>
+        <td>Date of Birth:</td>
+        <td>{{ student.date_of_birth }}</td>
+    </tr>
+    <tr>
+        <td>Address:</td>
+        <td>{{ student.address }}</td>
+    </tr>
+    <tr>
+        <td>Department:</td>
+        <td>{{ student.department }}</td>
+    </tr>
+    <tr>
+        <td>International:</td>
+        <td>{% if student.is_international %}International{% else %}Domestic{% endif %}</td>
+    </tr>
+</table>
+
+<a href="{% url 'studentmgmtsys:delete_student' student.id %}">Delete</a>
+{% endblock %}

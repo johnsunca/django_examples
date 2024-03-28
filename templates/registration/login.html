@@ -1,0 +1,51 @@
+{% extends "bmsapp/base.html" %}
+
+{% block content %}
+
+<div class="div-center">
+  {% if form.errors and not form.non_field_errors %}
+  <p class="errornote">Please correct the errors below.
+  </p>
+  {% endif %}
+
+  {% if form.non_field_errors %}
+  {% for error in form.non_field_errors %}
+  <p class="error-message">
+    {{ error }}
+  </p>
+  {% endfor %}
+  {% endif %}
+
+  
+  {% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+  {% endif %}
+
+  {% if user.is_authenticated %}
+  <p>
+    You are authenticated as {{ user.username }}. Would you like to login to a different account?
+  </p>
+  {% endif %}
+
+  <form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
+    <div class="form-row">
+      {{ form.username.errors }}
+      {{ form.username.label_tag }} {{ form.username }}
+    </div>
+    <div class="form-row">
+      {{ form.password.errors }}
+      {{ form.password.label_tag }} {{ form.password }}
+      <input type="hidden" name="next" value="{{ next }}">
+    </div>
+    <div class="submit-row">
+      <button type="submit">Log in</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

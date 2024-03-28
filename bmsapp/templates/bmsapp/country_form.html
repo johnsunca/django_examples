@@ -1,0 +1,27 @@
+{% extends 'bmsapp/base.html' %}
+
+{% block title %}Country Form{% endblock %}
+
+{% block content %}
+<h1>{% if country %}Edit Country{% else %}Create Country{% endif %}</h1>
+<form method="post">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td><label for="name">Name:</label></td>
+            <td><input type="text" id="name" name="name" value="{% if country %}{{ country.name }}{% endif %}"></td>
+        </tr>
+        <tr>
+            <td><label for="abbreviation">Abbreviation:</label></td>
+            <td><input type="text" id="abbreviation" name="abbreviation" value="{% if country %}{{ country.abbreviation }}{% endif %}"></td>
+        </tr>
+        <tr>
+            <td><button type="submit">Save</button></td>
+            <td><a href="{% url 'country_list' %}" id="cancelButton">
+                <button type="button">Cancel</button>
+            </a></td>
+        </tr>
+    </table>
+</form>
+
+{% endblock %}

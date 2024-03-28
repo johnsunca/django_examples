@@ -1,0 +1,74 @@
+{% extends 'studentmgmtsys/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h1>Search Students</h1>
+<form action="{% url 'studentmgmtsys:search_students' %}" method="GET">
+    <table>
+        <tr>
+            <td><label for="student_id">Student ID:</label></td>
+            <td><input type="text" id="student_id" name="student_id"></td>
+        </tr>
+        <tr>
+            <td><label for="name">Name:</label></td>
+            <td><input type="text" id="name" name="name"></td>
+        </tr>
+        <tr>
+            <td><label for="birth_year">Birth Year:</label></td>
+            <td><input type="text" id="birth_year" name="birth_year"></td>
+        </tr>
+        <tr>
+            <td><label for="address">Address:</label></td>
+            <td><input type="text" id="address" name="address"></td>
+        </tr>
+        <tr>
+            <td><label for="department">Department:</label></td>
+            <td>
+                <select id="department" name="department">
+                    <option value="">Select Department</option>
+                    {% for department in departments %}
+                    <option value="{{ department.id }}">{{ department.name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="subject">Subject:</label></td>
+            <td>
+                <select id="subject" name="subject">
+                    <option value="">Select Subject</option>
+                    {% for subject in subjects %}
+                    <option value="{{ subject.id }}">{{ subject.name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="campus">Campus:</label></td>
+            <td>
+                <select id="campus" name="campus">
+                    <option value="">Select Campus</option>
+                    <option value="brampton">Brampton</option>
+                    <option value="mississauga">Mississauga</option>
+                    <option value="oakville">Oakville</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="is_international">International/Domestic:</label></td>
+            <td>    
+                <select id="is_international" name="is_international">
+                    <option value="any">Any</option>
+                    <option value="international">International</option>
+                    <option value="domestic">Domestic</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit">Search</button></td>
+        </tr>
+    </table>
+</form>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'bmsapp/base.html' %}
+
+{% block title %}Country List{% endblock %}
+
+{% block content %}
+<h1>Country List</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Abbreviation</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for country in country_list %}
+            <td><a href="{% url 'country_detail' country.id %}">{{ country.name }}</a></td>
+            <td>{{ country.abbreviation }}</td>
+            <td>
+                <a href="{% url 'country_update' country.id %}">
+                    <button>Edit</button>
+                </a>
+                <a href="{% url 'country_delete' country.id %}">
+                    <button>Delete</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'country_create' %}">
+    <button>Create Country</button>
+</a>
+{% endblock %}

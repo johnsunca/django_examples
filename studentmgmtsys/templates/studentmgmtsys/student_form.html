@@ -1,0 +1,35 @@
+{% extends 'studentmgmtsys/base.html' %}
+
+{% block title %}Student Form{% endblock %}
+
+{% block content %}
+<h1>{% if students or student %}Edit Student
+    {% if student %} : {{ student.name }}{% endif %}
+    {% else %}Add Student{% endif %}</h1>
+
+{% if students %}
+<select class="option_student" onchange="location = this.value;">
+    <option class="option_student">Choose the student to edit</option>
+    {% for stud in students %}
+    <option class="option_student" value="{% url 'studentmgmtsys:student_update' stud.id %}">{{stud.student_id}} - {{stud.name}}</a></option>
+    {% endfor %}
+</select>
+{% endif %}
+
+{% if not students or student %}
+<form method="post">
+    {% if error_message %}
+    <p class="error-message">{{ error_message }}</p>
+    {% endif %}
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <button type="submit">Save</button>
+    <a href="{% url 'studentmgmtsys:list_students' %}" id="cancelButton">
+        <button type="button">Cancel</button>
+    </a>
+</form>
+{% endif %}
+
+{% endblock %}

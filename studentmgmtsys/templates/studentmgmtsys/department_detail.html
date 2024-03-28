@@ -1,0 +1,21 @@
+{% extends 'studentmgmtsys/base.html' %}
+{% block title %}Department Detail{% endblock %}
+{% block content %}
+<h1>Department Detail - {{ department.name }}</h1>
+<table>
+    <tr>
+        <td>Name:</td>
+        <td>{{ department.name }}</td>
+    </tr>
+    <tr>
+        <td>Code:</td>
+        <td>{{ department.code }}</td>
+    </tr>
+    <tr>
+        <td>Campus:</td>
+        <td>{{ department.campus|title }}</td>
+    </tr>
+</table>
+
+<a href="{% url 'studentmgmtsys:delete_department' department.id %}">Delete</a>
+{% endblock %}
