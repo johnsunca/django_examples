@@ -46,7 +46,7 @@ def cart_view(request):
     total_price = sum(sub_totals)
     forms = [EditCartItemForm(initial={'quantity': cart_items[i].quantity}) for i in range(len(sub_totals))]
     for i in range(len(sub_totals)): 
-        forms[i]['quantity'].field.widget.attrs = {'max': cart_items[i].product.quantity, 'min': 1}
+        forms[i]['quantity'].field.widget.attrs = {'max': cart_items[i].quantity + cart_items[i].product.quantity, 'min': 1}
     cart_data = [{'cart_item':cart_items[i], 
                   'sub_total':sub_totals[i], 
                   'form': forms[i]} # EditCartItemForm(initial={'quantity': cart_items[i].quantity})} 
