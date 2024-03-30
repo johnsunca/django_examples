@@ -1,0 +1,57 @@
+{% extends 'ecommerce/base.html' %}
+{% block title %}Order Detail{% endblock %}
+
+{% block content %}
+
+<h1>Order Detail (ID: {{ order.id }})</h1>
+<hr>
+<h3>Order Items</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in order_data %}
+        <tr>
+            <td><a href="{% url 'ecommerce:product_detail' data.order_item.product.id %}">{{ data.order_item.product.name|title }}</a></td>
+            <td>${{ data.order_item.product.price }}</td>
+            <td>{{ data.order_item.quantity }}</td>
+            <td>${{ data.sub_total }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p><b>Total: ${{ total_price }}</b></p>
+<hr>
+<h3>Order Information</h3>
+<table class="table">
+    <tbody>
+        <tr>
+            <th>User:</th>
+            <td>{{ order.user.username }}</td>
+        </tr>
+        <tr>
+            <th>Date Ordered:</th>
+            <td>{{ order.date_ordered }}</td>
+        </tr>
+        <tr>
+            <th>Complete Status:</th>
+            <td>{% if order.complete %}Complete{% else %}Incomplete{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Shipping Address:</th>
+            <td>{{ order.shipping_address }}</td>
+        </tr>
+        <tr>
+            <th>Payment Method:</th>
+            <td>{{ order.get_payment_method_display }}</td>
+        </tr>
+    </tbody>
+</table>
+            
+{% endblock %}

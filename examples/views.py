@@ -5,8 +5,6 @@ from .forms import CreateUserForm
 def profile(request):
     return redirect('home')
 
-
-
 def signup(request):
     form = CreateUserForm()
     if request.method == "POST":

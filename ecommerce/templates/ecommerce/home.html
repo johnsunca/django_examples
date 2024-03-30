@@ -1,0 +1,31 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Welcome to Our Ecommerce Store</h1>
+    <hr>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-2 mb-2">
+            <div class="card">
+                <a href="{% url 'ecommerce:product_detail' product.id %}">
+                    <img src="https://picsum.photos/id/{{ product.id }}/200/200" class="card-img-top" alt="{{ product.name }}">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name|title }}</h5>
+                    <p class="card-text">Price: ${{ product.price }}</p>
+                    <p class="card-text">Quantity: {{ product.quantity }}</p>
+                    <!-- Add to Cart Button -->
+                    <form action="{% url 'ecommerce:add_to_cart' product.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

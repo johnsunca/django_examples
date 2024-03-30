@@ -31,10 +31,11 @@ urlpatterns = [
     path("signup/", views.signup, name="signup"), # this can be moved out to project level
 
     # Apps
-    path("studentmgmtsys/", include("studentmgmtsys.urls")),        # 4
-    path("bmsapp/", include("bmsapp.urls")),        # 3 - book mgmt sys
-    # path("modelsapp/", include("modelsapp.urls")),      # 2
-    # path("helloworld/", include("helloworld.urls")),    # 1
+    path("ecommerce/", include("ecommerce.urls")), 
+    path("studentmgmtsys/", include("studentmgmtsys.urls")), 
+    path("bmsapp/", include("bmsapp.urls")), 
+    # path("modelsapp/", include("modelsapp.urls")),
+    # path("helloworld/", include("helloworld.urls")),
 
 ]
 

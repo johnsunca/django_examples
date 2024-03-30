@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bmsapp', # JS
     'studentmgmtsys', # JS
+    'ecommerce',
     # 'helloworld', # JS
     # 'modelsapp', # JS
 ]
