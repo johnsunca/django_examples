@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="container">
-    <h1>Welcome to Our Ecommerce Store</h1>
+    <h1>{% if category_name %}{{ category_name }}{% else %}Welcome to Our Ecommerce Store{% endif %}</h1>
     <hr>
     <div class="row">
         {% for product in products %}

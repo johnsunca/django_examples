@@ -17,6 +17,7 @@ def home(request, category_id=None):
     if category:
         products = Product.objects.filter(category=category).order_by('name')
         context = {
+            'category_name': category.name,
             'categories': Category.objects.all(),
             'products': products,
         }
