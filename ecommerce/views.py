@@ -101,7 +101,7 @@ def create_order(request):
             order = Order.objects.create(user=request.user, shipping_address=shipping_address, payment_method=payment_method)            
             # cart_items = cart.items.all()
             for cart_item in cart_items:
-                if cart_item.quantity >= cart_item.product.quantity:
+                if cart_item.quantity <= cart_item.product.quantity:
                     OrderItem.objects.create(order=order, product=cart_item.product, quantity=cart_item.quantity)          
                     # Deduct quantity from available stock
                     cart_item.product.quantity -= cart_item.quantity
