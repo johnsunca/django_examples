@@ -46,7 +46,7 @@ def cart_view(request):
     total_price = sum(sub_totals)
     forms = [EditCartItemForm(initial={'quantity': cart_items[i].quantity}) for i in range(len(sub_totals))]
     for i in range(len(sub_totals)): 
-        forms[i]['quantity'].field.widget.attrs = {'max': cart_items[i].quantity + cart_items[i].product.quantity, 'min': 1}
+        forms[i]['quantity'].field.widget.attrs = {'max': cart_items[i].product.quantity, 'min': 1}
     cart_data = [{'cart_item':cart_items[i], 
                   'sub_total':sub_totals[i], 
                   'form': forms[i]} # EditCartItemForm(initial={'quantity': cart_items[i].quantity})} 
@@ -66,9 +66,6 @@ def add_to_cart(request, product_id):
         else:
             cart_item.quantity = 1
         cart_item.save()
-        # Deduct quantity from available stock
-        product.quantity -= 1
-        product.save()
     return redirect('ecommerce:cart_view')
 
 @login_required
@@ -82,17 +79,12 @@ def edit_cart_item(request, cart_item_id):
             if 1 <= new_quantity <= cart_item.product.quantity:
                 old_quantity = cart_item.quantity
                 cart_item.quantity = new_quantity
-                cart_item.save()
-                cart_item.product.quantity -= new_quantity - old_quantity
-                cart_item.product.save()
+                cart_item.save()                
     return redirect('ecommerce:cart_view')    
 
 @login_required
 def remove_from_cart(request, cart_item_id):
     cart_item = CartItem.objects.get(id=cart_item_id)
-    old_quantity = cart_item.quantity
-    cart_item.product.quantity += old_quantity
-    cart_item.product.save()
     cart_item.delete()
     return redirect('ecommerce:cart_view')
     
@@ -109,7 +101,11 @@ def create_order(request):
             order = Order.objects.create(user=request.user, shipping_address=shipping_address, payment_method=payment_method)            
             # cart_items = cart.items.all()
             for cart_item in cart_items:
-                OrderItem.objects.create(order=order, product=cart_item.product, quantity=cart_item.quantity)            
+                if cart_item.quantity >= cart_item.project.quantity:
+                    OrderItem.objects.create(order=order, product=cart_item.product, quantity=cart_item.quantity)          
+                    # Deduct quantity from available stock
+                    cart_item.product.quantity -= cart_item.quantity
+                    cart_item.product.save()
             cart.items.clear()
             # add new order id to session
             request.session['last_order'] = order.id
