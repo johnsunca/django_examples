@@ -174,7 +174,7 @@ def test_data(request):
 
     # Create users
     if User.objects.count() < 10:
-        for _ in range(10 - User.objects.count):
+        for _ in range(10 - User.objects.count()):
             username = fake.user_name()
             email = fake.email()
             password = fake.password()
