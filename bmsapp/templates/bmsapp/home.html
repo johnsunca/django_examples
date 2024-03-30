@@ -7,7 +7,7 @@
 <hr>
 <h3>Application Information</h3>
 {% if user.is_superuser %}
-<h5><a href="{% url 'generate_fake_data' %}">Generate Fake Data</a></h5>
+<h5><a href="{% url 'bmsapp:generate_fake_data' %}">Generate Fake Data</a></h5>
 {% endif %}
 <table>
     <thead>
